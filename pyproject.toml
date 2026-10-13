@@ -1,0 +1,129 @@
+[project]
+name = "fraud-system"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "oleh", email = "arkhiolog@gmail.com" }
+]
+keywords = ["fraud-detection", "neuro-symbolic", "explainable-ai", "pytorch", "risk"]
+requires-python = ">=3.12"
+dependencies = [
+    "fastparquet>=2026.9.0",
+    "kaggle>=2.2.4",
+    "pyarrow>=25.0.1",
+]
+
+[project.scripts]
+fraud-system = "fraud_system:main"
+
+[build-system]
+requires = ["uv_build>=0.12.22,<0.13.0"]
+build-backend = "uv_build"
+
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    # Core
+    "torch>=2.1",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+
+    # Configs
+    "hydra-core>=1.3",
+    "omegaconf>=2.3",
+
+    # Data
+    "pyarrow>=14.0",
+    "pydantic>=2.5",
+
+    # Serving
+    "fastapi>=0.104",
+    "uvicorn[standard]>=0.24",
+
+    # Demo
+    "streamlit>=1.28",
+
+    # Monitoring
+    "evidently>=0.4",
+
+    # Tracking
+    "mlflow>=2.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1",
+    "black>=23.10",
+    "mypy>=1.6",
+    "pre-commit>=3.5",
+]
+
+docs = [
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.4",
+]
+
+# [tool.setuptools.packages.find]
+# where = ["src"]
+
+# -------------------------------------------------------------------------------
+# Ruff - ?????? + ????????? (???????? flake8 + isort)
+# -------------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+# src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+]
+ignore = ["E501"]  # line length ?????????????? ???????????
+
+# -------------------------------------------------------------------------------
+# Black - ?????????
+# -------------------------------------------------------------------------------
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+# -------------------------------------------------------------------------------
+# Pytest
+# -------------------------------------------------------------------------------
+# [tool.pytest.ini_options]
+# testpaths = ["tests"]
+# pythonpath = ["src"]
+# addopts = "-v --cov=src --cov-report=term-missing"
+
+# -------------------------------------------------------------------------------
+# MyPy - ?????????
+# -------------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+    "kaggle>=2.2.4",
+    "pandas>=3.0.6",
+]
